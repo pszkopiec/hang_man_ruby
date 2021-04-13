@@ -1,0 +1,2 @@
+
+p YAML::load(--- !ruby/object:Game {})

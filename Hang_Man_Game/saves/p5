@@ -1,0 +1,20 @@
+require "yaml"
+
+game = YAML::load(--- !ruby/object:Game)
+
+game.game
+
+the_word: misremember
+board:
+- m
+- __
+- __
+- __
+- __
+- m
+- __
+- m
+- __
+- __
+- __
+incorrect_guess: 0

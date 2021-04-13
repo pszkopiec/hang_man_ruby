@@ -1,0 +1,212 @@
+
+def dictionary_array
+  dictionary = File.readlines "5desk_dictionary.txt", chomp:true
+  dictionary_array = []
+  dictionary.each do |word|
+    dictionary_array.push word
+  end
+  return dictionary_array
+end
+
+def find_word(dictionary_array)
+  the_word = dictionary_array.sample 
+  until the_word.length >= 5 and the_word.length <= 12 do
+    the_word = dictionary_array.sample
+  end
+  return the_word
+end
+
+def board(find_word, dictionary_array)
+  board = Array.new(find_word(dictionary_array).length-1,"__")
+  return board
+end
+
+board(dictionary_array,find_word)
+
+def game_intro
+  puts "Welcome to Hangman!"
+end
+
+
+
+def hang_man_figure(incorrect_guess)
+  if incorrect_guess == 0
+    puts " 
+              
+        __________ 
+        |         |
+        |         |
+                  |
+                  |
+                  |
+                  |
+                  |
+                  |
+                  |
+                  |
+      ____________|
+"
+  elsif incorrect_guess == 1
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^        |
+      |__|        |
+                  |
+                  |
+                  |
+                  |
+                  |
+                  |
+      ____________|
+"
+  elsif incorrect_guess == 2
+ 
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^^       |
+      |___|       |
+        |         |
+        |         |
+        |         |
+        |         |
+                  |
+                  |
+      ____________|
+"
+  elsif incorrect_guess == 3
+
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^^       |
+      |___|       |
+        |         |
+        |         |
+        |         |
+        |         |
+         \        |
+          \       |
+           \_     |
+                  |
+      ____________|
+"
+  elsif incorrect_guess == 4
+
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^^       |
+      |___|       |
+        |         |
+        |         |
+        |         |
+        |         |
+       / \        |
+      /   \       |
+    _/     \_     |
+                  |
+  ________________|
+"
+
+  elsif incorrect_guess == 5
+
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^^       |
+      |___|       |
+        |         |
+        |____/_   |
+        |    \    |
+        |         |
+       / \        |
+      /   \       |
+    _/     \_     |
+                  |
+  ________________|
+"
+  elsif incorrect_guess == 6
+
+    puts "
+        __________ 
+        |         |
+        |         |
+      ^^^^^       |
+      |___|       |
+        |         |
+  _\____|____/_   |
+   /    |    \    |
+        |         |
+       / \        |
+      /   \       |
+    _/     \_     |
+                  |
+__________________|
+    GAME OVER "
+  end
+end
+
+def incorrect_guess?(guess)
+  incorrect_guess = 0
+  if guess == the_world.split("").any?
+    return 
+  elsif
+    incorrect_guess += 1
+  end
+  return incorrect_guess
+end
+
+def update_board(guess)
+   the_word.split("").each_with_index do |n,i|
+     if n == guess 
+       array_board[i] = guess
+     else
+       next
+     end
+   end
+   p array_board
+end
+
+def guess 
+  puts "What is your guess?"
+  guess = gets.chomp
+    until guess.length != 1 || guess.type_of(Letter) != true do
+      puts "Please enter only ONE LETTER at a time. Thank you."
+      guess = gets.chomp
+    end
+    return guess
+end
+
+def game_end?
+  if the_board.all?{|x| x != "_"}
+    true
+  else
+    false
+  end
+end  
+
+
+def Game
+  until game_end? == true || incorrect_guess == 6 do
+  game_intro  
+  guess
+  incorrect_guess?
+  hang_man_figure
+  update_board
+  game_end?
+  end
+  if game_end == true
+    puts "You Win!"
+  else
+    hang_man_figure
+    puts "You Lose!"
+  end
+end
+
